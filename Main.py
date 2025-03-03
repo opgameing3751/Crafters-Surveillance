@@ -46,7 +46,7 @@ except:
 
 load_dotenv("Settings.env")
 API_KEY = os.getenv("API_KEY")
-
+sleep_deplay = int(os.getenv("update_delay"))
 Title_color = os.getenv("Title_color", "\033[33m")  # Yellow
 Username_color = os.getenv("Username_color", "\033[32m")  # Green
 time_color = os.getenv("time_color", "\033[37m")  # White
@@ -110,4 +110,4 @@ while True:
     except Exception as e:
         print(f"\033[31mAn error occurred: {e}\033[0m")
 
-    time.sleep(int(os.getenv("update_delay")))
+    time.sleep(sleep_deplay)
