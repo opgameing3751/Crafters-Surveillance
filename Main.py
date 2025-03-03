@@ -1,8 +1,48 @@
-import os
-import time
-import requests
-from dotenv import load_dotenv
-from datetime import datetime, timedelta
+import subprocess
+import sys
+import argparse
+# ANSI color codes
+GREEN = "\033[32m"
+YELLOW = "\033[33m"
+RED = "\033[31m"
+RESET = "\033[0m"
+
+# List of required packages
+required_packages = ["requests", "python-dotenv, dotenv"]
+
+def install_package(package):
+    """Install a package using pip, optionally with --break-system-packages."""
+    try:
+        command = [sys.executable, "-m", "pip", "install", package]
+        command.append("--break-system-packages")
+        
+        subprocess.check_call(command)
+        print(f"{GREEN}Successfully installed: {package}{RESET}")
+    except subprocess.CalledProcessError:
+        print(f"{RED}Failed to install: {package}{RESET}")
+
+
+try:
+    import os
+    import time
+    import requests
+    from dotenv import load_dotenv
+    from datetime import datetime, timedelta
+except:
+    for package in required_packages:
+        try:
+            __import__(package)
+            print(f"{GREEN}{package} is already installed.{RESET}")
+        except ImportError:
+            print(f"{YELLOW}Installing {package}...{RESET}")
+            install_package(package)
+    import os
+    import time
+    import requests
+    from dotenv import load_dotenv
+    from datetime import datetime, timedelta
+
+
 
 load_dotenv("Settings.env")
 API_KEY = os.getenv("API_KEY")
