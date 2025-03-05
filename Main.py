@@ -8,7 +8,7 @@ RED = "\033[31m"
 RESET = "\033[0m"
 
 # List of required packages
-required_packages = ["requests", "python-dotenv, dotenv"]
+required_packages = ["requests", "python-dotenv"]
 
 def install_package(package):
     """Install a package using pip, optionally with --break-system-packages."""
